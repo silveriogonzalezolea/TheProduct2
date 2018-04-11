@@ -33,6 +33,18 @@ namespace TheBoredProfessor2
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = "679005383725-p1ksjj71gqlcc00urplb0o5qu4ql2r8k.apps.googleusercontent.com";
+                googleOptions.ClientSecret = "IPFXeHMYh_fdUaKCCq_syBNi";
+            });
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "1660927034020369";
+                facebookOptions.AppSecret = "727e8487dd356a5540eaafcc12871a2e";
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheBoredProfessor2.Models;
 
 namespace TheBoredProfessor2.Controllers
-{
+{   
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -15,12 +17,7 @@ namespace TheBoredProfessor2.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
+        
 
         public IActionResult Contact()
         {
