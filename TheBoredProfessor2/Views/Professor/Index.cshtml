@@ -2,14 +2,30 @@
     
 }
 
-<h1>My Research </h1>
+<h1>@ViewBag.Title</h1>
 
 
-<ul>
-    @foreach (string researchpaper in ViewBag.researchpapers)
-    {
-        <li>@researchpaper</li>
 
-    }
+@if (ViewBag.researchpapers.Count == 0)
+ {
+    <p>Ay yo, you ain't got nothing saved</p>
 
-</ul>
+
+ }
+<table class="table-responsive">
+        <tr>
+            <th>Keywords </th>
+            <th>Absract </th>
+        </tr>
+
+
+        @foreach (var researchpaper in ViewBag.researchpapers)
+        {
+        <tr>
+            <td>@researchpaper.Keywords</td>
+            <td>@researchpaper.Absract</td>
+
+        </tr>
+        }
+</table>
+<p><a asp-controller="Professor" asp-action="SearchKeywords"> Get started searching.</a></p>
