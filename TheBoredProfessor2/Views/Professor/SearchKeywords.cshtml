@@ -1,24 +1,38 @@
 ﻿
 @{
+    ViewBag.title = "My Papers";
+
 }
 
-<h1>Search Keywords</h1>
+
+<h1>@ViewBag.title</h1>
 <form method="post" class="form-inline my-2 my-sm-0">
 
     <div>
-        <input name="keywords" id="keywords" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Random Search" />
+        <input name="keywords" id="keywords" class="form-control mr-sm-2" type="search" placeholder="Search" >
+        <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Random Search"  id="keywords"   />
     </div>
     <br />
 
     <div>
-        <label for="absract">Absract</label>
-        <input name="absract" id="absract" type="text" />
+        
+        
     </div>
    
-
-
-
-
-
 </form>
+
+@section Scripts 
+{
+    <script>
+        $(document).ready(function () {
+        $.("button").click(function () {
+            $.post("http://export.arxiv.org/api/query?search_query=all:", {
+
+
+            }
+
+        });
+      });
+     
+    </script>
+}

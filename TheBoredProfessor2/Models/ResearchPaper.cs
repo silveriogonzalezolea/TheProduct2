@@ -8,14 +8,15 @@ namespace TheBoredProfessor2.Models
     public class ResearchPaper
     {
         public string Keywords { get; set; }
-        public string Absract { get; set; }
-        public int ResearchPaperId { get; set; }
-        private static int nextId = 1;
+        public string ResearchPaperId { get; set; }
+        public string Title { get; set; }
+        public string Link { get; set; }
+        public string MyProperty { get; set; }
+
 
         public ResearchPaper()
         {
-            ResearchPaperId = nextId;
-            nextId++;
+            
 
         }
     }

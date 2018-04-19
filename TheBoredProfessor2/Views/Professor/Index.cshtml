@@ -1,31 +1,84 @@
 ﻿@{
-    
+
 }
 
-<h1>@ViewBag.Title</h1>
+@*<h1>@ViewBag.Title</h1>*@
 
 
 
-@if (ViewBag.researchpapers.Count == 0)
- {
-    <p>Ay yo, you ain't got nothing saved</p>
+@*@if (ViewBag.researchpapers.Count == 0)
+     {
+        <p>Ay yo, you ain't got nothing saved</p>
 
 
- }
-<table class="table-responsive">
-        <tr>
-            <th>Keywords </th>
-            <th>Absract </th>
-        </tr>
+     }
+    <table class="table-responsive">
+            <tr>
+                <th>Keywords </th>
+                <th>Absract </th>
+            </tr>
 
 
-        @foreach (var researchpaper in ViewBag.researchpapers)
-        {
-        <tr>
-            <td>@researchpaper.Keywords</td>
-            <td>@researchpaper.Absract</td>
+            @foreach (var researchpaper in ViewBag.researchpapers)
+            {
+            <tr>
+                <td>@researchpaper.Keywords</td>
+                <td>@researchpaper.Absract</td>
 
-        </tr>
-        }
-</table>
+            </tr>
+            }
+    </table>*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="searchContainer">
+            <h1>Search for :</h1>
+            <input type="text" id="searchPaper" class="form-control" placeholder="Search ... " />
+
+        </div>
+    </div>
+    <br />
+    <div id="paper">
+        
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#searchPaper').on('keyup', function(e){
+                let itemname = e.target.value;
+
+                // make request for paper
+                $.ajax({
+                    url: 'https://api.dp.la/v2/items?q=' + itemname + '&api_key=2e4248a6f039a3cd52d34bf1217d49a7'
+
+
+                }).done(function (i) {
+                    $('#paper').html(`
+                        ${i.docs[Object]}
+                        ${i.count}
+                        
+ 
+                  `);
+                    
+                    
+
+                });
+            });     
+
+        });
+    </script>
+
+
+</body>
+</html>
+
 <p><a asp-controller="Professor" asp-action="SearchKeywords"> Get started searching.</a></p>

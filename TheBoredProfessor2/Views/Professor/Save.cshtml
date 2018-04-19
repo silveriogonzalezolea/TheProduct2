@@ -1,1 +1,16 @@
-﻿
+﻿<h1>@ViewBag.title = "Save Me Prof."</h1>
+
+
+/// do in javascript 
+<form>
+    @foreach (var paper in ViewBag.researchpapers)
+     {
+        <input type="checkbox" name="paperid" id="@paper.ResearchPaperId" value="@paper.ResearchPaperId" />
+        <label for="paper.ResearchPaperId">@paper.Keywords</label>
+
+
+
+     }
+    <input type="submit" value=" Save me!"/>
+
+</form>

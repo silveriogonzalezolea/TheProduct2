@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheBoredProfessor2.Models;
 
@@ -9,6 +10,7 @@ using TheBoredProfessor2.Models;
 
 namespace TheBoredProfessor2.Controllers
 {
+    //[Route("api/[contoller]")]
     public class ProfessorController : Controller
     {
         static private List<ResearchPaper> ResearchPapers = new List<ResearchPaper>();
@@ -28,19 +30,26 @@ namespace TheBoredProfessor2.Controllers
             return View();
         }
 
-        [HttpPost]
-        [Route("/Professor/SearchKeywords")]
-        public IActionResult NewSearch(string keywords ,string absract = "")
+        
+
+        
+
+        [HttpPost]        
+        public IActionResult NewSearch(string keywords )
         {
+
+           
             ResearchPaper newPaper = new ResearchPaper
             {
                 Keywords = keywords,
-                Absract = absract,
+                
             };
             ResearchPapers.Add(newPaper);
 
+            
             return Redirect("/Professor");
         }
+
 
         public IActionResult Save()
         {
@@ -51,9 +60,9 @@ namespace TheBoredProfessor2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save()
+        public IActionResult Save(string placeholder )
         {
-
+            return View();
         }
     }
 }
