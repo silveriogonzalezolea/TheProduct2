@@ -1,33 +1,4 @@
-﻿@{
-
-}
-
-@*<h1>@ViewBag.Title</h1>*@
-
-
-
-@*@if (ViewBag.researchpapers.Count == 0)
-     {
-        <p>Ay yo, you ain't got nothing saved</p>
-
-
-     }
-    <table class="table-responsive">
-            <tr>
-                <th>Keywords </th>
-                <th>Absract </th>
-            </tr>
-
-
-            @foreach (var researchpaper in ViewBag.researchpapers)
-            {
-            <tr>
-                <td>@researchpaper.Keywords</td>
-                <td>@researchpaper.Absract</td>
-
-            </tr>
-            }
-    </table>*@
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +11,10 @@
 
 </head>
 <body>
+
+
     <div class="container">
+
         <div class="searchContainer">
             <h1>Search for :</h1>
             <input type="text" id="searchPaper" class="form-control" placeholder="Search ... " />
@@ -59,23 +33,83 @@
 
                 // make request for paper
                 $.ajax({
-                    //url: 'https://api.dp.la/v2/items?q=' + itemname + '&api_key=2e4248a6f039a3cd52d34bf1217d49a7'  // Json-ld data
+                    url: 'https://api.dp.la/v2/items?q=' + itemname + '&api_key=2e4248a6f039a3cd52d34bf1217d49a7'  // Json-ld data
                     //  url: 'https://www.loc.gov/search/?q=' + itemname+  '&fo=json'                               //Json data
-                    url: 'https://export.arxiv.org/api/query?search_query=all:' + itemname +'&max_results=1' // Xml data 
+                    //url: 'https://export.arxiv.org/api/query?search_query=all:' + itemname +'&max_results=1' // Xml data 
 
 
-                }).done()
+                }).done(function (data) {
+                    var docContainer = $("#paper");
+                    console.log(docContainer);
+
+                    //for (var x = 0; x < data.docs.length; x++) {
+                    //    var div = document.createElement("div")
+                    //    div.textContent = data.docs[x].dataProvider;
+                        
+
+                    //    docContainer.append(div);
+
+                    //}
+                    document.getElementById("paper").innerHTML = `
+
+
+
+<h1> You've got (${data.count} results )</h1>
+${data.docs.map(function (someParam) {
+                        return `
+<div class="text-muted">
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">make me smile</th>
+      <th scope="col"></th>
+      <th scope="col">Column heading</th>
+      <th scope="col">Column heading</th>
+    </tr>
+  </thead>
+  <tbody>  
+    
+    
+    <tr class="table-primary">
+      <th scope="row">Danger</th>
+      <td >${someParam.sourceResource.title}</td>
+      <td>${someParam.provider.name}<td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row"><button type="button" class="btn btn-outline-secondary">Secondary</button></th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    
+  </tbody>
+</table> 
+
+</div>
+`
+
+
+}).join('')}
+        
+
+
+
+
+
+`
+
+
+                });
             });     
 
         });
 
-        function xmlParser(xml) {
-            $(xml).find("entry").each(function () {
-                $(#paper).append('<div class="entry"><br/><div class="title">' + $(this).find("title").text() + '</div></div>');
+       
 
-            });
-                
-        }
+  
+
+       
 
 
 
@@ -86,4 +120,3 @@
 </body>
 </html>
 
-<p><a asp-controller="Professor" asp-action="SearchKeywords"> Get started searching.</a></p>

@@ -16,7 +16,7 @@ using TheBoredProfessor2.Services;
 
 namespace TheBoredProfessor2.Controllers
 {
-    [Authorize]
+    
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -281,7 +281,7 @@ namespace TheBoredProfessor2.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+                return RedirectToLocal("/Professor");
             }
             if (result.IsLockedOut)
             {
@@ -293,7 +293,7 @@ namespace TheBoredProfessor2.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
+                return Redirect("/Professor");
             }
         }
 

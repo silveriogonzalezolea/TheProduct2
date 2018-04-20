@@ -10,54 +10,22 @@ using TheBoredProfessor2.Models;
 
 namespace TheBoredProfessor2.Controllers
 {
-    //[Route("api/[contoller]")]
+     
     public class ProfessorController : Controller
     {
-        static private List<ResearchPaper> ResearchPapers = new List<ResearchPaper>();
-       
-        // GET: /<controller>/
         
+
+        // GET: /<controller>/
+       
         public IActionResult Index()
         {        
 
-            ViewBag.researchpapers = ResearchPapers; 
-
-            return View();
-        }
-
-        public IActionResult SearchKeywords()
-        {
-            return View();
-        }
-
-        
-
-        
-
-        [HttpPost]        
-        public IActionResult NewSearch(string keywords )
-        {
-
            
-            ResearchPaper newPaper = new ResearchPaper
-            {
-                Keywords = keywords,
-                
-            };
-            ResearchPapers.Add(newPaper);
-
-            
-            return Redirect("/Professor");
-        }
-
-
-        public IActionResult Save()
-        {
-            ViewBag.title = "Save A Paper";
-            ViewBag.researchpapers = ResearchPapers;
 
             return View();
         }
+
+       
 
         [HttpPost]
         public IActionResult Save(string placeholder )
