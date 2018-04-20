@@ -55,26 +55,31 @@
         $(document).ready(function(){
             $('#searchPaper').on('keyup', function(e){
                 let itemname = e.target.value;
+                
 
                 // make request for paper
                 $.ajax({
-                    url: 'https://api.dp.la/v2/items?q=' + itemname + '&api_key=2e4248a6f039a3cd52d34bf1217d49a7'
+                    //url: 'https://api.dp.la/v2/items?q=' + itemname + '&api_key=2e4248a6f039a3cd52d34bf1217d49a7'  // Json-ld data
+                    //  url: 'https://www.loc.gov/search/?q=' + itemname+  '&fo=json'                               //Json data
+                    url: 'https://export.arxiv.org/api/query?search_query=all:' + itemname +'&max_results=1' // Xml data 
 
 
-                }).done(function (i) {
-                    $('#paper').html(`
-                        ${i.docs[Object]}
-                        ${i.count}
-                        
- 
-                  `);
-                    
-                    
-
-                });
+                }).done()
             });     
 
         });
+
+        function xmlParser(xml) {
+            $(xml).find("entry").each(function () {
+                $(#paper).append('<div class="entry"><br/><div class="title">' + $(this).find("title").text() + '</div></div>');
+
+            });
+                
+        }
+
+
+
+
     </script>
 
 
