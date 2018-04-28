@@ -281,7 +281,7 @@ namespace TheBoredProfessor2.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal("/Professor");
+                return Redirect("/Professor/Index");
             }
             if (result.IsLockedOut)
             {
@@ -293,7 +293,7 @@ namespace TheBoredProfessor2.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return Redirect("/Professor");
+                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
             }
         }
 

@@ -10,7 +10,7 @@ using TheBoredProfessor2.Models;
 
 namespace TheBoredProfessor2.Controllers
 {
-     
+   
     public class ProfessorController : Controller
     {
         
@@ -27,10 +27,6 @@ namespace TheBoredProfessor2.Controllers
 
        
 
-        [HttpPost]
-        public IActionResult Save(string placeholder )
-        {
-            return View();
-        }
+    
     }
 }
